@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, ScrollView, View, Text } from 'react-native';
-import Colors from '../../../utils/colors';
 import Header from '../../../components/header';
+import Colors from '../../../utils/colors';
 
 export default function About({ navigation }) {
 	return (
@@ -11,12 +11,38 @@ export default function About({ navigation }) {
 				contentContainerStyle={styles.scrollViewContainer}
 			>
 				<Text style={styles.text}>
-					{`Com apontamento de algumas pesquisas e opiniões embasadas de pessoas da área, torna-se clara a enorme demanda que surgiu no mercado para máscaras de proteção. Outra grande alta recente no mercado, devido a pandemia COVID-19, foi a de tecnológicos em geral. 
+					{`A magnitude do problema da fome no mundo é inestimável e suas causas
+são diversas. Um estudo publicado pela FAO (Food and Agriculture
+Organization) aponta que a produção global de alimentos é suficiente para
+suprir a demanda das mais de 7 bilhões de pessoas do mundo. Apesar disso,
+aproximadamente 11% das pessoas passam fome.
+Esses dados indicam que há algumas coisas de errado no processo que
+ocorre entre a produção de alimentos e a sua distribuição. Um dos
+principais problemas é o desperdício de alimentos. É estimado que, em
+alguns países, 40% dos alimentos produzidos são desperdiçados no início do
+processo devido a deterioração. Isso se dá pela pobreza e pelas condições
+precárias de infraestrutura de muitos fazendeiros e agricultores de pequeno
+e médio porte.
 
-Naturalmente, pensa-se em unir ambas as demandas e, com a evolução da tecnologia de forma cada vez mais caseira - lâmpadas e trancas de portas inteligentes, é natural a indução da tecnologia para a solução de um problema globalmente avançado. Alguns titãs da indústria já estão desenvolvendo as suas, mas como em qualquer mercado jovem, as inovações mais inesperadas surgem de pequenos projetos. 
+Considerando essas questões, criamos o wheatland, uma colaboração na
+solução desse problema complexo que é a fome. O wheatland é um
+conglomerado de e-commerce que, através da organização de sites de
+venda online e uma parceria com o PayPal, aproxima o usuário de suas
+compras. A cada compra, o wheatland arredonda o valor da sua compra
+para cima e doa essa diferença para ONGs engajadas em ajudar pequenos
+fazendeiros, ajudando-os a melhorar a infraestrutura e, consequentemente,
+diminuir o desperdício de comida.
 
-O projeto da smartmask compõe o desenvolvimento de uma máscara e de um aplicativo. A máscara contém uma placa TinyPICO Nano, uma das menores placas de desenvolvimento com conexões Bluetooth e WiFi, e alguns sensores acoplados nela, como sensores de umidade, temperatura e proximidade.
-`}
+Como exemplo, em uma compra de mercado que resultou R$18,27, o valor
+pago pelo cliente do wheatland seria R$19,00 e os 73 centavos de diferença
+são acumulados no fundo de doação.
+
+O projeto do wheatland é composto de um aplicativo mobile e de uma
+página web. O usuário cadastrado no sistema pode acessar uma listagem de
+ONGs relacionadas ao problema da fome e escolher uma para ser o
+recipiente de sua doação. Além da listagem de ONGs, o usuário tem acesso
+ao histórico de doações em geral, podendo filtrá-las pelo seu nome de
+usuário ou pela ONG receptora. `}
 				</Text>
 				<View style={styles.field}>
 					<Text style={styles.fieldName}>Email de contato</Text>
@@ -30,7 +56,7 @@ O projeto da smartmask compõe o desenvolvimento de uma máscara e de um aplicat
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: '#fff',
+		backgroundColor: Colors.white,
 		flex: 1,
 		paddingHorizontal: 16,
 		paddingVertical: 16
@@ -47,11 +73,11 @@ const styles = StyleSheet.create({
 		marginTop: 16
 	},
 	fieldName: {
-		color: Colors.primary,
+		color: Colors.secondary,
 		fontSize: 16,
 	},
 	fieldValue: {
-		color: Colors.primary,
+		color: Colors.secondary,
 		fontSize: 14,
 		opacity: .75
 	}

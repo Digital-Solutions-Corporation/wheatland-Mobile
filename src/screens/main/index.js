@@ -4,7 +4,7 @@ import { Text } from 'react-native';
 import UserContext from '../../context/userContext';
 import Colors from '../../utils/colors';
 import About from './about';
-import PanelsContainer from './panels';
+import Home from './home';
 import User from './user';
 
 const Drawer = createDrawerNavigator();
@@ -40,8 +40,8 @@ export default function AppMain({ route, navigation }) {
 				}}
 			>
 				<Drawer.Screen
-					name="Panels"
-					component={PanelsContainer}
+					name="Home"
+					component={Home}
 					options={{
 						title: "Home"
 					}}

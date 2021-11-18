@@ -29,10 +29,14 @@ export const generateTicket = (code = "") => {
 	// https://stackoverflow.com/a/9035732/12707218
 	const date = new Date(start + rng() * (now - start));
 	const value = 10.0 + rng() * 490.0;
+	const roundedValue = Math.ceil(value);
+	const donateValue = roundedValue - value;
 
 	return {
 		date,
 		value,
+		roundedValue,
+		donateValue,
 		code
 	};
 }
@@ -93,7 +97,7 @@ export const createUser = async (nome, email, senha) => {
 			email,
 			senha,
 			id,
-			donations =[]
+			donations: []
 		};
 		users[id] = user;
 		await insertObject("users", users);
@@ -114,6 +118,32 @@ export const getUserByEmailSenha = async (email, senha) => {
 			throw new Error("Senha incorreta");
 		}
 		user.donations = user.donations || [];
+		user.donations = [
+			{
+				ong: "Lorem Ipsum",
+				date: new Date(Date.now()),
+				value: 127.37,
+				roundedValue: 128.0,
+				donateValue: .63,
+				code: 234666123
+			},
+			{
+				ong: "Lorem Ipsum",
+				date: new Date(Date.now()),
+				value: 122.50,
+				roundedValue: 123.0,
+				donateValue: .40,
+				code: 234666124
+			},
+			{
+				ong: "Lorem Ipsum",
+				date: new Date(Date.now()),
+				value: 127.05,
+				roundedValue: 128.0,
+				donateValue: .95,
+				code: 234666125
+			},
+		]
 		return user;
 	} catch (e) {
 		throw e;
@@ -121,7 +151,7 @@ export const getUserByEmailSenha = async (email, senha) => {
 }
 
 export const userAlreadyUsedTicket = (user, ticketCode) => {
-	return ticket in user.donations;
+	return user.donations.find(d => d.code === ticketCode) !== undefined;
 }
 
 export const ticketDonateToONG = async (user, id, ticket) => {
@@ -129,7 +159,7 @@ export const ticketDonateToONG = async (user, id, ticket) => {
 		const ongs = await getObject("ongs");
 		ongs[id].founded += ticket.value;
 		await insertObject("ongs", ongs);
-		user.donations.push(ticket.code);
+		user.donations.push(ticket);
 		await updateUser(user);
 	} catch (e) {
 		throw e;
