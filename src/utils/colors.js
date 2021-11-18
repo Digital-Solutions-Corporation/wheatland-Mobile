@@ -6,7 +6,8 @@ const Colors = {
 	safeColor: "#00FF85",
 	warningColor: "#FCA311",
 	unsafeColor: "#FF0B63",
-	errorColor: "#FF475D"
+	errorColor: "#FF475D",
+	disabled: "#FFDE8380",
 }
 
 export default Colors;

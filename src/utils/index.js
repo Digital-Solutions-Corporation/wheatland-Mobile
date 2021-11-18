@@ -1,3 +1,4 @@
+import { Alert } from "react-native";
 import { insertString, insertObject, getString, getObject, hasKey, removeKey } from "./asyncstorage";
 
 // https://stackoverflow.com/a/47593316/12707218
@@ -22,12 +23,20 @@ export const randomID = (len) => {
 	return result;
 }
 
+export const hashString = (str = "") => {
+	let res = 0;
+	for (let i = 0; i < str.length; i++) {
+		res += str.charCodeAt(i) * Math.pow(10, i);
+	}
+	return res;
+}
+
 export const generateTicket = (code = "") => {
-	const rng = mulberry32(parseInt(code));
+	const rng = mulberry32(hashString(code));
 	const end = Date.now();
+	// Five days before
 	const start = end - 4e8;
-	// https://stackoverflow.com/a/9035732/12707218
-	const date = new Date(start + rng() * (now - start));
+	const date = start + rng() * (end - start);
 	const value = 10.0 + rng() * 490.0;
 	const roundedValue = Math.ceil(value);
 	const donateValue = roundedValue - value;
@@ -41,10 +50,29 @@ export const generateTicket = (code = "") => {
 	};
 }
 
-export const getDonateValue = (value) => {
-	if (Math.abs(Math.ceil(value) - value) < .01) return 1.0;
-	return Math.ceil(value) - value;
+export const validEmail = (email = "") => {
+	return (/^\S+@\S+$/).test(email);
 }
+
+export const validTransactionCode = (code = "") => {
+	return (/^\S{4}\.\S{4}\.\S{4}\.\S{4}-\S{2}$/).test(code);
+}
+
+export const asyncAlert = async (title, message, okMessage = 'ok') => new Promise((resolve, reject) => {
+	Alert.alert(
+		title,
+		message,
+		[
+			{
+				text: okMessage,
+				onPress: () => {
+					resolve('YES');
+				},
+			},
+		],
+		{ cancelable: false },
+	);
+});
 
 export const updateONGs = async () => {
 	try {
@@ -118,32 +146,8 @@ export const getUserByEmailSenha = async (email, senha) => {
 			throw new Error("Senha incorreta");
 		}
 		user.donations = user.donations || [];
-		user.donations = [
-			{
-				ong: "Lorem Ipsum",
-				date: new Date(Date.now()),
-				value: 127.37,
-				roundedValue: 128.0,
-				donateValue: .63,
-				code: 234666123
-			},
-			{
-				ong: "Lorem Ipsum",
-				date: new Date(Date.now()),
-				value: 122.50,
-				roundedValue: 123.0,
-				donateValue: .40,
-				code: 234666124
-			},
-			{
-				ong: "Lorem Ipsum",
-				date: new Date(Date.now()),
-				value: 127.05,
-				roundedValue: 128.0,
-				donateValue: .95,
-				code: 234666125
-			},
-		]
+		user.donations = [];
+
 		return user;
 	} catch (e) {
 		throw e;

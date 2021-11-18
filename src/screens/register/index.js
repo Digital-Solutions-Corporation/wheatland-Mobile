@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import InputField, { useInputField } from '../../components/inputField';
-import { createUser } from '../../utils';
+import { createUser, validEmail } from '../../utils';
 import Colors from '../../utils/colors';
 import Images from '../../utils/images';
 
@@ -20,6 +20,10 @@ export default function Register({ navigation }) {
 		senha.setErr("");
 		senha2.setErr("");
 		let localErr = false;
+		if (!validEmail(email.val)) {
+			email.setErr("Formato inválido, use algo como 'exemplo@email.com'");
+			localErr = true;
+		}
 		if (nome.val === "") {
 			nome.setErr("Nome não pode ser vazio");
 			localErr = true;

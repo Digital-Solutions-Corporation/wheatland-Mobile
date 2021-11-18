@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Colors from '../../utils/colors';
 
 export default function TransactionPanel({ong, date, value, roundedValue, donateValue}) {
+	const d = new Date(date);
 
 	return (
 		<View style={styles.container}>
@@ -13,7 +14,7 @@ export default function TransactionPanel({ong, date, value, roundedValue, donate
 			<View style={styles.spacer} />
 			<View style={styles.field}>
 				<Text style={styles.fieldName}>Data:</Text>
-				<Text style={[styles.fieldValue, styles.fieldValueColor1]}>{date.getDay()}/{date.getMonth()}/{date.getFullYear()}</Text>
+				<Text style={[styles.fieldValue, styles.fieldValueColor1]}>{d.getDay()}/{d.getMonth()}/{d.getFullYear()}</Text>
 			</View>
 			<View style={styles.spacer} />
 			<View style={styles.field}>
