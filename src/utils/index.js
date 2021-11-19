@@ -146,7 +146,6 @@ export const getUserByEmailSenha = async (email, senha) => {
 			throw new Error("Senha incorreta");
 		}
 		user.donations = user.donations || [];
-		user.donations = [];
 
 		return user;
 	} catch (e) {
